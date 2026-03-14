@@ -1,0 +1,48 @@
+# --- Python Standard ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.mypy_cache/
+.ruff_cache/
+
+# --- Distribution / Build ---
+# PyPI公開時のビルド成果物
+build/
+dist/
+local_settings.py
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- uv / Virtual Environments ---
+# 仮想環境とuv特有のキャッシュ
+.venv/
+.uv/
+
+# --- Testing / Coverage ---
+# pytestのキャッシュとカバレッジレポート
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+docs/coverage/
+docs/report.html
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+assets/
+
+# --- IDEs / Editors ---
+# 開発者の環境依存ファイル
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# --- Project Specific ---
+# 実行時に生成される成果物
+out.md
+context.md
