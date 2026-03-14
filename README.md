@@ -1,6 +1,6 @@
-# ctxpack
+# pyctxpack
 
-**ctxpack** は、ローカルリポジトリのソースコードを1つのテキストファイルにまとめ、LLM（ChatGPT, Claude, Gemini等）に渡すコンテキストを瞬時に作成するためのコマンドラインツールです。
+**pyctxpack** は、ローカルリポジトリのソースコードを1つのテキストファイルにまとめ、LLM（ChatGPT, Claude, Gemini等）に渡すコンテキストを瞬時に作成するためのコマンドラインツールです。
 
 多くのファイルを扱うプロジェクトでも、適切なフィルタリングとフォーマットによって、AIへの依頼をスムーズにします。
 
@@ -19,14 +19,14 @@
 ## インストール
 
 ```bash
-pip install ctxpack
+pip install pyctxpack
 
 ```
 
 または **uv** を使用している場合:
 
 ```bash
-uv tool install ctxpack
+uv tool install pyctxpack
 
 ```
 
@@ -36,7 +36,7 @@ uv tool install ctxpack
 基本コマンド:
 
 ```bash
-ctxpack src/ -o context.md
+pyctxpack src/ -o context.md
 
 ```
 
@@ -45,28 +45,28 @@ ctxpack src/ -o context.md
 **拡張子を限定する:**
 
 ```bash
-ctxpack . -o out.md -e py,js,ts
+pyctxpack . -o out.md -e py,js,ts
 
 ```
 
 **プロジェクト構造を含め、.gitignoreを反映させる:**
 
 ```bash
-ctxpack . -o out.md --tree --gitignore
+pyctxpack . -o out.md --tree --gitignore
 
 ```
 
 **トークン数を見積もり、ファイルにも記録する:**
 
 ```bash
-ctxpack . -o out.md --estimate-tokens --token-output
+pyctxpack . -o out.md --estimate-tokens --token-output
 
 ```
 
 **LLMに最適化されたフォーマット（セパレーターを強化）を使用:**
 
 ```bash
-ctxpack . -o out.md --llm-format
+pyctxpack . -o out.md --llm-format
 
 ```
 
