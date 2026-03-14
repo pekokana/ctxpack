@@ -100,7 +100,7 @@ Issue や Pull Request は大歓迎です。
 開発環境のセットアップ:
 
 ```bash
-git clone https://github.com/your-username/ctxpack.git
+git clone https://github.com/pekokana/ctxpack.git
 cd ctxpack
 uv sync
 uv run pytest  # 全テストの実行
