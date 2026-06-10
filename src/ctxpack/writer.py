@@ -32,28 +32,29 @@ def write_output(
     root=None,
     show_tree=False,
     include_tokens=False,
-    llm_format=False
+    llm_format=False,
 ):
 
     total_tokens = 0
 
-    with open(output_path, "w", encoding="utf-8") as out:
-
+    # 変更ポイント1: newline="" を指定して、Pythonによる余計な改行変換を抑止する
+    with open(output_path, "w", encoding="utf-8", newline="") as out:
         if show_tree and root:
-
             tree = build_tree(files, root)
-
             out.write("# Project Structure\n\n")
             out.write("```\n")
             out.write(tree)
             out.write("\n```\n\n")
 
         for file in files:
-
             content = read_file(file)
 
             if content is None:
                 continue
+
+            # 変更ポイント2: 読み込んだ中身の末尾にある改行コードを一度綺麗に取り除く(rstrip)
+            # これにより、元ファイル由来の改行のブレをリセットします
+            content = content.rstrip()
 
             lang = detect_language(file)
 
@@ -62,9 +63,10 @@ def write_output(
             else:
                 out.write(f"# {file}\n\n")
 
+            # 変更ポイント3: コードブロックの中身を書き出し、明示的に改行を制御する
             out.write(f"```{lang}\n")
             out.write(content)
-            out.write("\n```\n\n")
+            out.write("\n```\n\n")  # 閉じコードブロックの後に空行を2つ
 
             total_tokens += estimate_tokens(content)
 

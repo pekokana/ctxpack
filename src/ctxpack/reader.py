@@ -7,7 +7,6 @@ def read_file(path: Path) -> str | None:
 
     raw = path.read_bytes()
 
-
     # UTF-16 BOM 判定
     if raw.startswith(b"\xff\xfe") or raw.startswith(b"\xfe\xff"):
         try:
@@ -16,8 +15,6 @@ def read_file(path: Path) -> str | None:
             # BOMがあるのにUTF-16として壊れているなら、
             # 他のエンコーディングを試さずバイナリ（None）とみなす
             return None
-
-
 
     # Binary file check
     if b"\x00" in raw:

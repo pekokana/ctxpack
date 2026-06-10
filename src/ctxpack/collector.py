@@ -3,11 +3,7 @@ from .gitignore import load_gitignore, is_ignored
 
 
 def collect_files(
-    target,
-    extensions=None,
-    max_size=None,
-    max_files=None,
-    use_gitignore=False
+    target, extensions=None, max_size=None, max_files=None, use_gitignore=False
 ):
 
     target = Path(target)
@@ -19,12 +15,21 @@ def collect_files(
     if target.is_file():
         return [target]
 
-    for path in target.rglob("*"):
+    for path in sorted(target.rglob("*")):
+        is_parent_ignored = False
+        if use_gitignore and spec:
+            # 自分自身、または親ディレクトリのいずれかが ignore 対象かチェック
+            for parent in [path] + list(path.parents):
+                if parent == target:
+                    break
+                if is_ignored(parent, target, spec):
+                    is_parent_ignored = True
+                    break
 
-        if not path.is_file():
+        if use_gitignore and is_parent_ignored:
             continue
 
-        if use_gitignore and is_ignored(path, target, spec):
+        if not path.is_file():
             continue
 
         if extensions:
